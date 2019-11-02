@@ -31,9 +31,9 @@ class Gui():
         self.lblcombustivel = Label(self.window, text="Tipo de combustível")
         self.lblconsumo_cidade = Label(self.window, text="Consumo na cidade")
         self.lblconsumo_estrada = Label(self.window, text="Consumo na estrada")
-        self.lbltempo_0_100 = Label(self.window, text="Tipo de combustível")
-        self.lblchassi = Label(self.window, text="Consumo na cidade")
-        self.lblplaca = Label(self.window, text="Consumo na estrada")
+        self.lbltempo_0_100 = Label(self.window, text="Tempo de 0 a 100")
+        self.lblchassi = Label(self.window, text="Chassi")
+        self.lblplaca = Label(self.window, text="Placa")
         self.lbltamanho_pneu = Label(self.window, text="Tamanho do pneu")
         self.lblsom = Label(self.window, text="Som")
         self.lblvalor_diaria = Label(self.window, text="Valor da diária")
@@ -58,8 +58,8 @@ class Gui():
         self.entValor_Diaria = Entry(self.window, textvariable=self.txtValor_Diaria)
         
 
-        self.listClientes = Listbox(self.window, width=45)
-        self.scrollClientes = Scrollbar(self.window)
+        self.listVeiculos = Listbox(self.window, width=45)
+        self.scrollVeiculos = Scrollbar(self.window)
 
         self.btnViewAll = Button(self.window, text="Ver todos")
         self.btnBuscar = Button(self.window, text="Buscar")
@@ -76,6 +76,7 @@ class Gui():
         self.lblmodelo.grid(row=1,column=0)
         self.lblano.grid(row=2,column=0)
         self.lblcor.grid(row=3, column=0)
+        
         self.entMarca.grid(row=0, column=1)
         self.entModelo.grid(row=1, column=1)
         self.entAno.grid(row=2, column=1)
@@ -103,12 +104,13 @@ class Gui():
 
         self.lblsom.grid(row=8,column=2)
         self.lblvalor_diaria.grid(row=9,column=2)
+        
         self.entSom.grid(row=8, column=3)
         self.entValor_Diaria.grid(row=9, column=3)
 
         
-        self.listClientes.grid(row=0, column=4, rowspan=10)#rowspan para fazer com que o objeto ocupe mais de uma linha.
-        self.scrollClientes.grid(row=0, column=5, rowspan=10)
+        self.listVeiculos.grid(row=0, column=4, rowspan=10)#rowspan para fazer com que o objeto ocupe mais de uma linha.
+        self.scrollVeiculos.grid(row=0, column=5, rowspan=10)
         self.btnViewAll.grid(row=4, column=0, columnspan=2)#columnspan para fazer com que o objeto ocupe mais de uma linha.
         self.btnBuscar.grid(row=5, column=0, columnspan=2)
         self.btnInserir.grid(row=6, column=0, columnspan=2)
@@ -117,8 +119,8 @@ class Gui():
         self.btnClose.grid(row=9, column=0, columnspan=2)
 
         #Associando a Scrollbar com a Listbox...
-        self.listClientes.configure(yscrollcommand=self.scrollClientes.set)
-        self.scrollClientes.configure(command=self.listClientes.yview)
+        self.listVeiculos.configure(yscrollcommand=self.scrollVeiculos.set)
+        self.scrollVeiculos.configure(command=self.listVeiculos.yview)
 
     def configure_sizes(self):
         "definindo o tamanho dos elementos"
@@ -164,4 +166,4 @@ class Gui():
         self.configure_sizes()
         self.window.mainloop()
 
-Gui().run()
+#Gui().run()

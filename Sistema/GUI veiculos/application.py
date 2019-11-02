@@ -1,7 +1,7 @@
 from GUI import Gui
 from dao import VeiculoDAO
 from tkinter import END
-#from model import Client
+from model import Veiculo
 
 '''
 Adaptado de:
