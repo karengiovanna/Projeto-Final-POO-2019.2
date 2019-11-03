@@ -1,4 +1,4 @@
-from GUI import Gui
+from GUI_Dados_Pessoais import Gui
 from dao import ClientDAO
 from tkinter import END
 from cliente import Client

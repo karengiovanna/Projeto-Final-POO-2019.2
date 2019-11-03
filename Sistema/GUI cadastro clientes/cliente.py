@@ -1,5 +1,5 @@
 class Client:
-    def __init__(self, nacionalidade ="", tipo_documento ="", genero ="", telefone ="", numero_cnh ="", numero_registro_cnh ="", data_validade_cnh ="", uf_cnh ="", rg ="", nascimento ="", cep ="", logradouro ="", endereco ="", numero_endereco ="", complemento ="", bairro ="", cidade ="", estado ="", contato_emergencial ="", nome_contato_emergencial ="", nome="", sobrenome="", email="", cpf="", nascimento= ""):
+    def __init__(self, nacionalidade ="", tipo_documento ="", genero ="", telefone ="", numero_cnh ="", numero_registro_cnh ="", data_validade_cnh ="", uf_cnh ="", rg ="", nascimento ="", cep ="", logradouro ="", endereco ="", numero_endereco ="", complemento ="", bairro ="", cidade ="", estado ="", contato_emergencial ="", nome_contato_emergencial ="", nome="", sobrenome="", email="", cpf=""):
         # dados pessoais
         self.nacionalidade = nacionalidade
         self.tipo_documento = tipo_documento
