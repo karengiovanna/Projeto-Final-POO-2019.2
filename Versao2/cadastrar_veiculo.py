@@ -20,7 +20,7 @@ class CadastroVeiculo:
        self.window['bg'] = '#c9c9ff'
 
        self.heading = Label(self.master, text="Cadastro de Veiculos", bg='#c9c9ff', fg='white', font=(
-       'Verdana 40 bold'))
+       'Verdana 20 bold'))
        self.heading.place(x=400, y=0)
 
        # marca ========================================================================= 
