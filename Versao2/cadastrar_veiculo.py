@@ -12,16 +12,16 @@ class CadastroVeiculo:
        self.master = master
        self.veiculo = Veiculo()
        self.dao = VeiculoDAO()
-
+       '''
        self.window = Tk()
        self.window.geometry('1350x850+0+0')
        self.window.title('Cadastro de veículo')
        self.window.resizable(0, 0)  # impede de maximizar
        self.window['bg'] = '#c9c9ff'
-
+       '''
        self.heading = Label(self.master, text="Cadastro de Veiculos", bg='#c9c9ff', fg='white', font=(
        'Verdana 20 bold'))
-       self.heading.place(x=400, y=0)
+       self.heading.place(x=650, y=0)
 
        # marca ========================================================================= 
        self.marca = Label(self.master, text="Marca do veículo :", bg='#c9c9ff', fg='white', font=(
@@ -248,4 +248,4 @@ class CadastroVeiculo:
         self.window.mainloop()
 
 
-CadastroVeiculo().run()
+#CadastroVeiculo().run()

@@ -1,94 +1,158 @@
-from tkinter import Tk, Frame, Button, Menu
-from veiculo.cadastrar_veiculo import CadastroVeiculo
-# from veiculo..atualizar_veiculo import AtualizaVeiculo
-#from veiculo.delete_veiculo import DeleteVeiculo
-#from fornecedor.fornecedor_cadastro import FornecedorCadastro
+from tkinter import *
+from cadastrar_veiculo import CadastroVeiculo
+from cadastrar_cliente import CadastroCliente
+#from produto_atualizar import ProdutoAtualiza
+from delete_veiculo import DeleteVeiculo
 #from fornecedor.fornecedor_atualizar import FornecedorAtualizar
-#from fornecedor.fornecedor_deletar import FornecedorDeletar
-#from locacao.locacao import Locacao
+#rom fornecedor.fornecedor_deletar import FornecedorDeletar
+from locacao import Locacao
+from clienteDAO import ClienteDAO
+from cliente import Cliente
+import tkinter.messagebox
+import datetime
 
 class Main(Frame):
-    def __init__(self, *args, **kwargs):
-       Frame.__init__(self, master=None)
+       def __init__(self, tk):
+              self.frame1 = Frame(tk)
+              self.frame2 = Frame(tk)
+              self.frame3 = Frame(tk)
 
-       # Configuração da janela principal
-       self.master.title('Bem-vindo ao sistema de locação de carros')
-       self.master.geometry('1280x720+0+0')
-       # Impede de maximizar
-       self.master.resizable(0, 0)  
+              self.frame2.pack(side= 'bottom', anchor = 'ne')
+              #self.frame2.place(side = 'RIGHT')
 
-       self.menubar = Menu(self.master, bg='lightblue')
-       self.master.configure(menu=self.menubar)
-       self.menu_veiculo = Menu(self.menubar)
-       self.menu_cliente = Menu(self.menubar)
-       #self.menu_fornecedor = Menu(self.menubar)
-       self.menu_locacao = Menu(self.menubar)
+              self.frame1.pack()
+              self.frame1.place(relx=.4, rely=.5, anchor="w")
+              
+              self.frame3.pack()
+              self.frame3.place(relx=.5, rely=.5, anchor="c")
 
-       self.menubar.add_cascade(label='Veiculo  ', font=(
-       'arial 20 bold'), menu=self.menu_veiculo)
-       self.menubar.add_cascade(label='Cliente  ', font=(
-       'arial 20 bold'), menu=self.menu_cliente)
-       '''self.menubar.add_cascade(label='Fornecedor  ', font=(
-       'arial 20 bold'), menu=self.menu_fornecedor)
-       '''
-       self.menubar.add_cascade(label='Caixa ', font=(
-       'arial 20 bold'), menu=self.menu_locacao)
+              self.heading = Label(self.frame1, text="4x4 Sistema de locação", bg='#c9c9ff', fg='black', font=(
+              'Verdana 16 bold'))
+              self.heading.pack(fill=X, pady=0)
 
-       self.menu_veiculo.add_command(label='Cadastrar Veiculo', font=(
-       'arial 18 bold'), command=self.cadastrar_veiculo)
-       '''self.menu_veiculo.add_command(label='Atualizar Veiculo', font=(
-       'arial 18 bold'), command=self.veiculo)
-       '''
-       self.menu_veiculo.add_command(label='Deletar Veiculo', font=(
-       'arial 18 bold'), command=self.deletar_produto)
 
-       self.menu_cliente.add_command(label='Cadastrar Cliente', font=(
-       'arial 18 bold'))
-       self.menu_cliente.add_command(label='Atualizar Cliente', font=(
-       'arial 18 bold'))
-       self.menu_cliente.add_command(label='Deletar Cliente', font=(
-       'arial 18 bold'))
+              # BOTOES CLIENTE  ========================================================================= 
+              self.BotaoCadastrarCliente = Button(self.frame1, text="Cadastrar cliente", width=60, height=2, bg='#ffdfba', fg='black', font=(
+              'Verdana 15 bold'), command=self.cadastrar_cliente)
+              self.BotaoCadastrarCliente.pack(fill=X, pady=0)
 
-       '''
-       self.menu_fornecedor.add_command(label='Cadastrar Fornecedor', font=(
-       'arial 18 bold'), command= self.cadastrar_fornecedor)
-       self.menu_fornecedor.add_command(label='Atualizar Fornecedor', font=(
-       'arial 18 bold'), command= self.atualizar_fornecedor)
-       self.menu_fornecedor.add_command(label='Deletar Fornecedor', font=(
-       'arial 18 bold'), command= self.deletar_fornecedor)
-       '''
+              self.BotaoAlterarCliente = Button(self.frame1, text="Alterar cliente", width=30, height=2, bg='#ffdfba', fg='black', font=(
+              'Verdana 15 bold'), command=self.alterar)
+              self.BotaoAlterarCliente.pack(fill=X, pady=0)
 
-       self.menu_locacao.add_command(label='Realizar locacao', font=(
-       'arial 18 bold'), command = self.realizar_locacao)
+              self.BotaoExcluirCliente = Button(self.frame1, text="Excluir cliente", width=60, height=2, bg='#ffdfba', fg='black', font=(
+              'Verdana 15 bold'), command=self.alterar)
+              self.BotaoExcluirCliente.pack(fill=X, pady=0)
 
-       self.configure(borderwidth=4)
-       self.configure(background='lightblue')
+              # BOTOES VEICULO  ========================================================================= 
+              self.BotaoCadastrarVeiculo = Button(self.frame1, text="Cadastrar veiculo", width=30, height=2, bg='#baffc9', fg='black', font=(
+              'Verdana 15 bold'), command=self.cadastrar_veiculo)
+              self.BotaoCadastrarVeiculo.pack(fill= X, pady=0) 
 
-       # Empacotamos o frame principal
-       self.pack(fill='both', expand=True)
+              self.BotaoAlterarVeiculo = Button(self.frame1, text="Alterar veiculo", width=30, height=2, bg='#baffc9', fg='black', font=(
+              'Verdana 15 bold'), command=self.alterar)
+              self.BotaoAlterarVeiculo.pack(fill= X, pady=0) 
 
+              self.BotaoExcluirVeiculo = Button(self.frame1, text="Excluir veiculo", width=30, height=2, bg='#baffc9', fg='black', font=(
+              'Verdana 15 bold'), command=self.alterar)
+              self.BotaoExcluirVeiculo.pack(fill= X, pady=0) 
+
+              # BOTOES LOCACAO E SAIR  ========================================================================= 
+              self.BotaoEfetuarLocacao = Button(self.frame1, text="Efetuar locação", width=30, height=2, bg='#c8a2c8', fg='black', font=(
+              'Verdana 15 bold'), command=self.efetuar_locacao)
+              self.BotaoEfetuarLocacao.pack(fill= X, pady=0) 
+
+              self.BotaoSair = Button(self.frame2, text="Sair", width=22, height=2, bg='#ffb3ba', fg='black', font=(
+              'Verdana 15 bold'), command=self.close)
+              self.BotaoSair.pack(fill= X, padx = 12, pady = 42,)
+
+              '''
+              self.Botao1 = Button(self.frame1, text='Clique nesse botão para alterar.', command=self.alterar, bg='darkred')
+
+              self.entrada1 = Label(self.frame2, text='Usuário:', width=8, height=2, bg='#baffc9', fg='black', font=('Verdana 15 bold'))
+              self.entrada1.place(x=0, y=1000)
+
+              self.entrada2 = Entry(self.frame2)
+
+
+              self.Botao1.pack()
+              self.entrada1.pack(side=LEFT)
+              self.entrada2.pack(side=LEFT)
+              '''
+       def alterar(self):
+              self.BotaoCadastrarCliente.pack_forget() #Retiro todos esses
+              self.BotaoAlterarCliente.pack_forget() #Retiro todos esses
+              self.BotaoExcluirCliente.pack_forget() #Retiro todos esses
+              self.BotaoCadastrarVeiculo.pack_forget() #Retiro todos esses
+              self.BotaoAlterarVeiculo.pack_forget() #Retiro todos esses
+              self.BotaoExcluirVeiculo.pack_forget() #Retiro todos esses
+              self.BotaoEfetuarLocacao.pack_forget() #Retiro todos esses
+              #self.BotaoSair.pack_forget() #Retiro todos esses
+              #self.heading.pack_forget() #Retiro todos esses
+              '''
+              self.Botao1.pack_forget() #Retiro todos esses
+              
+              self.entrada1.pack_forget() #Retiro todos esses
+              self.entrada2.pack_forget() #Retiro todos esses
+
+              # E no frame aonde os três acima estavam, eu coloquei esses:
+              self.Botao2 = Button(self.frame3, text='Clique nesse botão para voltar.', command=self.reverter, bg='darkgray')
+              self.entrada3 = Label(self.frame2, text='Digite algo acima', height=2)
+              self.entrada4 = Entry(self.frame1)
+
+              self.Botao2.pack()
+              self.entrada3.pack(side=LEFT)
+              self.entrada4.pack(side=LEFT)
+              '''
+
+       def reverter(self):
+              '''
+              self.Botao1.pack() # Para reverter eu simplesmente dei .pack() nesses
+              self.entrada1.pack() # Para reverter eu simplesmente dei .pack() nesses
+              self.entrada2.pack() # Para reverter eu simplesmente dei .pack() nesses
+
+              self.Botao2.pack() # Para reverter eu simplesmente dei .pack() nesses
+              self.entrada1.pack() # Para reverter eu simplesmente dei .pack() nesses
+              self.entrada2.pack() # Para reverter eu simplesmente dei .pack() nesses
+
+              self.Botao3.pack() # Para reverter eu simplesmente dei .pack() nesses
+              self.entrada1.pack() # Para reverter eu simplesmente dei .pack() nesses
+              self.entrada2.pack() # Para reverter eu simplesmente dei .pack() nesses
+
+
+              self.Botao2.pack_forget() # e "eliminei esses". Se isso não for feito, ambos ocupam o mesmo Frame.
+              self.entrada3.pack_forget() # e "eliminei esses". Se isso não for feito, ambos ocupam o mesmo Frame.
+              self.entrada4.pack_forget() # e "eliminei esses". Se isso não for feito, ambos ocupam o mesmo Frame.
+              '''
+       
        def cadastrar_veiculo(self):
+              self.alterar()
               CadastroVeiculo().run()
-       '''
-       def atualizar_veiculo(self):
-              ProdutoAtualiza().run()
        '''
        def deletar_veiculo(self):
               DeleteVeiculo().run()
        '''
-       def cadastrar_fornecedor(self):
-              FornecedorCadastro().run()
-
-       def atualizar_fornecedor(self):
-              FornecedorAtualizar().run()
-
-       def deletar_fornecedor(self):
-              FornecedorDeletar().run()
-       '''
-       def realizar_locacao(self):
+       def cadastrar_cliente(self):
+              self.alterar()
+              CadastroCliente().run()
+              
+       def efetuar_locacao(self):
+              self.alterar
               Locacao().run()
+       
+       def close(self):
+              #self.mainrun.quit
+              self.tela_inicial.destroy()
+
+def mainrun():
+       tela_inicial = Tk()
+       tela_inicial.geometry('1500x850+0+0')
+       tela_inicial.title('Locadora 4x4')
+       tela_inicial.resizable(0, 0)  # impede de maximizar
+       tela_inicial['bg'] = '#c9c9ff'
+       Main(tela_inicial)
+       tela_inicial.mainloop()
+mainrun()
 
 
-if __name__ == '__main__':
-    mainWindow = Main()
-    mainWindow.mainloop()
+
